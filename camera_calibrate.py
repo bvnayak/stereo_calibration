@@ -27,6 +27,8 @@ class StereoCalibration(object):
     def read_images(self, cal_path):
         images_right = glob.glob(cal_path + 'RIGHT/*.JPG')
         images_left = glob.glob(cal_path + 'LEFT/*.JPG')
+        images_left.sort()
+        images_right.sort()
 
         for i, fname in enumerate(images_right):
             img_l = cv2.imread(images_left[i])
@@ -65,27 +67,34 @@ class StereoCalibration(object):
                 cv2.waitKey(500)
             img_shape = gray_l.shape[::-1]
 
+        rt, self.M1, self.d1, r1, t1 = cv2.calibrateCamera(
+            self.objpoints, self.imgpoints_l, img_shape, None, None)
+        rt, self.M2, self.d2, r2, t2 = cv2.calibrateCamera(
+            self.objpoints, self.imgpoints_r, img_shape, None, None)
+
         self.stereo_calibrate(img_shape)
 
     def stereo_calibrate(self, dims):
         flags = 0
-        # flags |= cv2.CALIB_FIX_INTRINSIC
+        flags |= cv2.CALIB_FIX_INTRINSIC
         # flags |= cv2.CALIB_FIX_PRINCIPAL_POINT
-        # flags |= cv2.CALIB_USE_INTRINSIC_GUESS
+        flags |= cv2.CALIB_USE_INTRINSIC_GUESS
         flags |= cv2.CALIB_FIX_FOCAL_LENGTH
         # flags |= cv2.CALIB_FIX_ASPECT_RATIO
         flags |= cv2.CALIB_ZERO_TANGENT_DIST
         # flags |= cv2.CALIB_RATIONAL_MODEL
         # flags |= cv2.CALIB_SAME_FOCAL_LENGTH
-        flags |= cv2.CALIB_FIX_K3
-        flags |= cv2.CALIB_FIX_K4
-        flags |= cv2.CALIB_FIX_K5
+        # flags |= cv2.CALIB_FIX_K3
+        # flags |= cv2.CALIB_FIX_K4
+        # flags |= cv2.CALIB_FIX_K5
 
-        ret, M1, d1, M2, d2, R, T, E, F = cv2.stereoCalibrate(self.objpoints,
-                                                              self.imgpoints_l,
-                                                              self.imgpoints_r,
-                                                              dims, criteria=self.criteria_cal,
-                                                              flags=flags)
+        stereocalib_criteria = (cv2.TERM_CRITERIA_MAX_ITER +
+                                cv2.TERM_CRITERIA_EPS, 100, 1e-5)
+        ret, M1, d1, M2, d2, R, T, E, F = cv2.stereoCalibrate(
+            self.objpoints, self.imgpoints_l,
+            self.imgpoints_r, self.M1, self.d1, self.M2,
+            self.d2, dims,
+            criteria=stereocalib_criteria, flags=flags)
 
         print('Intrinsic_mtx_1', M1)
         print('dist_1', d1)
