@@ -67,9 +67,9 @@ class StereoCalibration(object):
                 cv2.waitKey(500)
             img_shape = gray_l.shape[::-1]
 
-        rt, self.M1, self.d1, r1, t1 = cv2.calibrateCamera(
+        rt, self.M1, self.d1, self.r1, self.t1 = cv2.calibrateCamera(
             self.objpoints, self.imgpoints_l, img_shape, None, None)
-        rt, self.M2, self.d2, r2, t2 = cv2.calibrateCamera(
+        rt, self.M2, self.d2, self.r2, self.t2 = cv2.calibrateCamera(
             self.objpoints, self.imgpoints_r, img_shape, None, None)
 
         self.stereo_calibrate(img_shape)
@@ -100,11 +100,17 @@ class StereoCalibration(object):
         print('dist_1', d1)
         print('Intrinsic_mtx_2', M2)
         print('dist_2', d2)
-
         print('R', R)
         print('T', T)
         print('E', E)
         print('F', F)
+
+        # for i in range(len(self.r1)):
+        #     print("--- pose[", i+1, "] ---")
+        #     self.ext1, _ = cv2.Rodrigues(self.r1[i])
+        #     self.ext2, _ = cv2.Rodrigues(self.r2[i])
+        #     print('Ext1', self.ext1)
+        #     print('Ext2', self.ext2)
 
         print('')
 
