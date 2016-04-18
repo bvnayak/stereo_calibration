@@ -46,6 +46,26 @@ $python camera_calibration.py /path/to/stereo/camera/images/
        [  9.25481179e-04,   4.26384886e-02,   1.00000000e+00]]))
 ```
 
+Output Parameters
+-----------------
+`Intrinsic_mtx_1` – output first camera matrix
+
+`dist_1` – output vector of distortion coefficients  (k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6]]) of 4, 5, or 8 elements. The output vector length depends on the flags.
+
+`Intrinsic_mtx_2` – output second camera matrix
+
+`dist_2` – output lens distortion coefficients for the second camera
+
+`R` – Output rotation matrix between the 1st and the 2nd camera coordinate systems.
+
+`T` – Output translation vector between the coordinate systems of the cameras.
+
+`E` – Output essential matrix.
+
+`F` – Output fundamental matrix.
+
+More reference on R, T, E and F can be found [here](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#stereocalibrate)
+
 References
 ----------
 * [Stereo Camera Calibration](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html) using OpenCV
