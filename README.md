@@ -64,7 +64,7 @@ __E__ – Output essential matrix.
 
 __F__ – Output fundamental matrix.
 
-More reference on R, T, E and F can be found [here](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#stereocalibrate)
+More reference on __R__, __T__, __E__ and __F__ can be found [here](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#stereocalibrate)
 
 References
 ----------
