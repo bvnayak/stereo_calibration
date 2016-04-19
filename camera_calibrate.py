@@ -72,7 +72,7 @@ class StereoCalibration(object):
         rt, self.M2, self.d2, self.r2, self.t2 = cv2.calibrateCamera(
             self.objpoints, self.imgpoints_r, img_shape, None, None)
 
-        self.stereo_calibrate(img_shape)
+        self.camera_model = self.stereo_calibrate(img_shape)
 
     def stereo_calibrate(self, dims):
         flags = 0
@@ -114,7 +114,13 @@ class StereoCalibration(object):
 
         print('')
 
+        camera_model = dict([('M1', M1), ('M2', M2), ('dist1', d1),
+                            ('dist2', d2), ('rvecs1', self.r1),
+                            ('rvecs2', self.r2), ('R', R), ('T', T),
+                            ('E', E), ('F', F)])
+
         cv2.destroyAllWindows()
+        return camera_model
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
