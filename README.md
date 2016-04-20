@@ -1,11 +1,11 @@
 =================================================================
 stereo_calibration - StereoCamera Calibration using Python-OpenCV
 =================================================================
-* Python Implementation of Stereo Camera Calibration
+* Python Implementation of Stereo Camera Calibration using [checkerboard pattern images](http://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html).
 
 Features
 --------
-* Prints Camera Matrices and R, T, E and F
+* Prints -or- Returns dict object containing Camera Matrices and R, T, E and F
 * Takes Stereo Camera Images path as an input
 
 Requirements
@@ -25,6 +25,7 @@ python camera_calibration.py /path/to/stereo/camera/images/
 >>> cal = StereoCalibration('/path/to/stereo/camera/images')
 >>> cal.camera_model
 ```
+
 Results
 -------
 ```
@@ -72,6 +73,11 @@ __E__ – Output essential matrix.
 __F__ – Output fundamental matrix.
 
 More reference on __R__, __T__, __E__ and __F__ can be found [here](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#stereocalibrate)
+
+Notes
+-----
+* Assumption here is that given image path contains two folders of checkerboard images named `LEFT` and `RIGHT`. User can change these relative folder paths.
+* User may also change `flags` as per calibration output requirements.
 
 References
 ----------
