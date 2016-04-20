@@ -15,8 +15,15 @@ Requirements
 
 Example
 -------
+* Run using the command line
 ```
 python camera_calibration.py /path/to/stereo/camera/images/
+```
+* Run using Python
+```
+>>> from camera_calibration import StereoCalibration
+>>> cal = StereoCalibration('/path/to/stereo/camera/images')
+>>> cal.camera_model
 ```
 Results
 -------
