@@ -1,4 +1,4 @@
-=================================================================
+
 stereo_calibration - StereoCamera Calibration using Python-OpenCV
 =================================================================
 * Python Implementation of Stereo Camera Calibration using [checkerboard pattern images](http://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html).
@@ -82,5 +82,3 @@ Notes
 References
 ----------
 * [Stereo Camera Calibration](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html) using OpenCV
-
-
